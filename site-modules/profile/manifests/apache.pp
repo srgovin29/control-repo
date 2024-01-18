@@ -6,7 +6,8 @@ class profile::apache (
   Stdlib::Port $port,
   Stdlib::Unixpath $docroot,
   String[1] $ensure = 'file',
-) {
+) 
+{
   
   class {'apache':
     default_vhost => false,
