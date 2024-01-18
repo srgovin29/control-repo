@@ -14,13 +14,14 @@ class profile::apache (
   }
 
   apache::vhost { $webhost:
-    port	  => $port,
-    docroot	=> $docroot,
+    port	        => $port,
+    docroot	      => $docroot,
   }
+
   file { 'index.html':
-    ensure	=> $ensure,
-    path	  => "${docroot}/index.html",
-    content	=> epp('profile/index.html.epp'),
-    mode	  => '0644',
+    ensure	      => $ensure,
+    path	        => "${docroot}/index.html",
+    content	      => epp('profile/index.html.epp'),
+    mode	        => '0644',
   }
 }
