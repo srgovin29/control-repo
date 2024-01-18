@@ -7,20 +7,20 @@ class profile::apache (
   Stdlib::Unixpath $docroot,
   String[1] $ensure = 'file',
 ) {
-
+  
   class {'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
   }
 
   apache::vhost { $webhost:
-    port	=> $port,
+    port	  => $port,
     docroot	=> $docroot,
   }
   file { 'index.html':
     ensure	=> $ensure,
-    path	=> "${docroot}/index.html",
+    path	  => "${docroot}/index.html",
     content	=> epp('profile/index.html.epp'),
-    mode	=> '0644'
+    mode	  => '0644',
   }
 }
