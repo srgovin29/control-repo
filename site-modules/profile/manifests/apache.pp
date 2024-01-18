@@ -6,8 +6,7 @@ class profile::apache (
   Stdlib::Port $port,
   Stdlib::Unixpath $docroot,
   String[1] $ensure = 'file',
-) 
-{ 
+) { 
   class {'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
@@ -23,5 +22,15 @@ class profile::apache (
     path	        => "${docroot}/index.html",
     content	      => epp('profile/index.html.epp'),
     mode	        => '0644',
+  }
+
+  # Add mod_ssl
+  apache::mod { 'ssl':
+    ensure => present,
+  }
+
+  # Add mod_rewrite
+  apache::mod { 'rewrite':
+    ensure => present,
   }
 }
