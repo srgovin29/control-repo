@@ -1,4 +1,4 @@
 node 'puppetagent02.devops.com' {
-  include Stdlib
+  include stdlib
   include role::apache
 }
