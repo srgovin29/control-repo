@@ -1,6 +1,6 @@
 <html>
 <body>
-ServerName <%= $facts[fqdn] %>
-ServerAlias <%= $facts[hostname] %>
+ServerName <%= $facts['networking']['fqdn'] %>
+ServerAlias <%= $facts['networking']['hostname'] %>
 </body>
 </html>
