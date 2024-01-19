@@ -3,9 +3,5 @@ class role::apache (
   Stdlib::Port $port        = 80,
   Stdlib::Unixpath $docroot  = "/var/www/${webhost}",
 ) {
-  class { 'profile::apache':
-    webhost  => $webhost,
-    port     => $port,
-    docroot  => $docroot,
-  }
+  include profile::apache
 }
