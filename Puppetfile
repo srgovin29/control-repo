@@ -18,3 +18,4 @@ forge 'https://forge.puppet.com'
 
 mod 'puppetlabs-stdlib', '9.4.1'
 mod 'puppetlabs-concat', '9.0.2'
+mod 'puppetlabs-apache', '12.0.2' 
