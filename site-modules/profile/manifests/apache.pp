@@ -4,9 +4,10 @@
 class profile::apache (
   String[1] $webhost        = 'puppetagent02.devops.com',
   Stdlib::Port $port        = 80,
-  Stdlib::Unixpath $docroot  = "/var/www/${webhost}",
+  Stdlib::Unixpath $docroot  = "/var/",
   String[1] $ensure = 'file',
 ) {
+
 
   file { 'index.html':
     ensure	      => $ensure,
