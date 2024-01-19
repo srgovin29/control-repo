@@ -1,5 +1,6 @@
 <html>
 <body>
-<%= $fqdn %>
+ServerName <%= $facts[fqdn] %>
+ServerAlias <%= $facts[hostname] %>
 </body>
 </html>
