@@ -6,8 +6,6 @@ class profile::apache (
   Stdlib::Port $port        = 80,
   Stdlib::Unixpath $docroot  = "/var/www/${webhost}",
   String[1] $ensure = 'file',
-  default_vhost => false,
-  mpm_module    => 'prefork',
 ) {
 
   file { 'index.html':
@@ -16,4 +14,4 @@ class profile::apache (
     content	      => epp('profile/index.html.epp'),
     mode	        => '0644',
   }
-}
+} 
