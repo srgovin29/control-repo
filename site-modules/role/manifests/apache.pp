@@ -1,7 +1,3 @@
-class role::apache (
-  String[1] $webhost        = 'puppetagent02.devops.com',
-  Stdlib::Port $port        = 80,
-  Stdlib::Unixpath $docroot  = "/var/www/${webhost}",
-) {
+class role::apache () {
   include profile::apache
 }
