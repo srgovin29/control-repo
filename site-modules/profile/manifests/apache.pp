@@ -6,7 +6,7 @@ class profile::apache (
   String[1] $ensure = 'file',
 ) 
 {
-  $webhost = $facts[:fqdn]
+  $webhost = $facts['fqdn']
   $docroot = "/var/www/${webhost}"
 /*  class {'apache':
     default_vhost => false,
