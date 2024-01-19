@@ -2,12 +2,12 @@
 # install apache with one vhost
 
 class profile::apache (
-  String[1] $webhost = $facts[:fqdn],
   Stdlib::Port $port = 80,
-  Stdlib::Unixpath $docroot = "/var/www/${webhost}",
   String[1] $ensure = 'file',
 ) 
 {
+  $webhost = $facts[:fqdn]
+  $docroot = "/var/www/${webhost}"
 /*  class {'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
