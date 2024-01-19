@@ -2,7 +2,7 @@
 # install apache with one vhost
 
 class profile::apache (
-  String[1] $webhost = $facts['fqdn'],
+  String[1] $webhost = $facts[:fqdn],
   Stdlib::Port $port = 80,
   Stdlib::Unixpath $docroot = "/var/www/${webhost}",
   String[1] $ensure = 'file',
