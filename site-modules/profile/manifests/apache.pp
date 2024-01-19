@@ -2,9 +2,9 @@
 # install apache with one vhost
 
 class profile::apache (
-  String[1] $webhost,
-  Stdlib::Port $port,
-  Stdlib::Unixpath $docroot,
+  String[1] $webhost        = 'puppetagent02.devops.com',
+  Stdlib::Port $port        = 80,
+  Stdlib::Unixpath $docroot  = "/var/www/${webhost}",
   String[1] $ensure = 'file',
 ) { 
   class {'apache':
