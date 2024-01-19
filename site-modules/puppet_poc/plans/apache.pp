@@ -1,5 +1,5 @@
 # Plan puppet_poc::apache will help to create apache web site using Tasks 
-plan puppet_poc::plan (
+plan puppet_poc::apache (
   TargetSpec   $webnodes,
   String $webuser = 'apacheadm',
   String $webgrp  = 'apachegrp',
