@@ -13,7 +13,7 @@ class profile::apache (
     mpm_module    => 'prefork',
   } */
 
-  apache::vhost { $webhost:
+  apache::vhost { "${webhost}":
     port	        => $port,
     docroot	      => $docroot,
   }
