@@ -6,7 +6,7 @@ class profile::apache (
   String[1] $ensure = 'file',
 ) 
 {
-  $webhost = $facts['fqdn']
+  $webhost = $facts['networking']['fqdn']
   $docroot = "/var/www/${webhost}"
 /*  class {'apache':
     default_vhost => false,
@@ -17,7 +17,7 @@ class profile::apache (
     port	        => $port,
     docroot	      => $docroot,
   } */
-  
+
   notify { "${webhost}": }
 
   file {'/var/www/':
