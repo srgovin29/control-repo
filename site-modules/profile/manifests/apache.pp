@@ -11,12 +11,14 @@ class profile::apache (
 /*  class {'apache':
     default_vhost => false,
     mpm_module    => 'prefork',
-  } */
+  } 
 
   apache::vhost { "${webhost}":
     port	        => $port,
     docroot	      => $docroot,
-  }
+  } */
+  
+  notify { "${webhost}": }
 
   file {'/var/www/':
      ensure     => directory,
