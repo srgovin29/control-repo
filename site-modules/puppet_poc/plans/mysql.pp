@@ -18,7 +18,7 @@ plan puppet_poc::mysql(
       notice('=============================================')
       out::message("${target} returned a value: ${result.value}")
     } else {
-      out::message("${target} Full result value: ${result.value.report.logs}")
+      out::message("${target} Full result value: ${result.value["report"]["logs"]}")
       notice('=============================================')
       out::message("${target} errored with a message: ${result.error.message}")
     }
