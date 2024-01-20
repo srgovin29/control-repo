@@ -14,13 +14,13 @@ plan puppet_poc::mysql(
   $mysql_results.each |$result| {
     $target = $result.target.name
     if $result.ok {
-      out::message("${target} Full result value: ${result}")
+      out::message("${target} Full result value for success: ${result}")
       notice('=============================================')
-      out::message("${target} returned a value: ${result.value}")
+      out::message("${target} returned a value for success: ${result.value}")
     } else {
-      out::message("${target} Full result value: ${result.value["report"]["logs"]}")
+      out::message("${target} Full result value for failure: ${result.value["report"]["logs"]}")
       notice('=============================================')
-      out::message("${target} errored with a message: ${result.error.message}")
+      out::message("${target} errored with a message for failure: ${result.error.message}")
     }
   }
 }
