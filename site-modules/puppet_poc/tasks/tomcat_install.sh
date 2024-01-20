@@ -23,3 +23,8 @@ fi
 echo "Adding Firewall to port $appport"
 # firewall-cmd --zone=public --permanent --add-port="$appport/tcp"
 # firewall-cmd --reload
+echo "starting tomcat service"
+systemctl daemon-reload
+systemctl start tomcat
+systemctl status tomcat
+systemctl enable tomcat
