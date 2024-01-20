@@ -22,7 +22,7 @@ plan puppet_poc::web_app_db(
   out::message("value is: ${web_status}")
   $web_status.to_data.each | $result | {
     out::message("result is :${result}")
-    $web_status_res = $web_status['value']['stdout']
+    $web_status_res = $web_status.value['stdout']
     out::message("value for stdout: ${web_status_res}")
   }
   /*$web_status.to_data.each | $result_hash | {
