@@ -1,6 +1,6 @@
 ## This plan is to install mysql server
 plan puppet_poc::mysql(
-  TargetSpec   $webnodes,
+  TargetSpec   $dbnodes,
 ) {
   $mysql_results = apply($dbnodes, '_catch_errors' => true ) {
     package { 'mysql-server':
