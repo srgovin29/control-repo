@@ -55,7 +55,7 @@ plan puppet_poc::tomcat(
     $target = $result.target.name
     if $result.ok {
       notice("${target} returned a value: ${result.value}")
-      notice("Printing stdout alsone ${result['result']['stdout']}")
+      notice("Printing stdout alsone ${result}")
     } else {
       notice("${target} errored with a message: ${result.error.message}")
       notice("Print whole error message ${target} errored with a message: ${result.error}")
