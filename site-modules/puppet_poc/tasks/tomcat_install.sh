@@ -14,6 +14,6 @@ if [ !  -f /opt/tomcat/apache-tomcat-8.5.98.tar.gz ]; then
       chown -R tomcat: /opt/tomcat
       chmod +x /opt/tomcat/latest/bin/*.sh
 fi
-echo "Adding Firewall to port 8080"
-firewall-cmd --zone=public --permanent --add-port="$appport/tcp"
-firewall-cmd --reload
+echo "Adding Firewall to port $appport"
+# firewall-cmd --zone=public --permanent --add-port="$appport/tcp"
+# firewall-cmd --reload
