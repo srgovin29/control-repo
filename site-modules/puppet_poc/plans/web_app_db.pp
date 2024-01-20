@@ -19,7 +19,9 @@ plan puppet_poc::web_app_db(
   String $websvc = 'httpd'
 ) {
   $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
-  notice("value is: ${web_status}")
+  out::message("value is: ${web_status}")
+  $web_status_res = $web_status['stdout']
+  out::message("value for stdout: ${web_status_res}")
   /*$web_status.to_data.each | $result_hash | {
     $web_status_res = $result_hash['result']['stdout']
     if $web_status_res != "ActiveState=active\nSubState=running\n" {
