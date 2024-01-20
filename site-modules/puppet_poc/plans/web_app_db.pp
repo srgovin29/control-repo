@@ -19,7 +19,8 @@ plan puppet_poc::web_app_db(
   String $websvc = 'httpd'
 ) {
   $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
-  $web_status.to_data.each | $result_hash | {
+  notice("value is: ${web_status}")
+  /*$web_status.to_data.each | $result_hash | {
     $web_status_res = $result_hash['result']['stdout']
     if $web_status_res != "ActiveState=active\nSubState=running\n" {
     fail_plan("Webservice named ${websvc} is not running , so plan fail here itself. 
@@ -27,5 +28,5 @@ plan puppet_poc::web_app_db(
     }   else {
       $web_status.to_data.each | $result_hash | { out::message("result is : ${result_hash}") }
     }
-  }
+  }*/
 }
