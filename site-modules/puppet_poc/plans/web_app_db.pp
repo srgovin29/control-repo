@@ -18,6 +18,6 @@ plan puppet_poc::web_app_db(
   String $webpkg = 'httpd',
   String $websvc = 'httpd'
 ) {
-  $web_status = run_command( "service status ${websvc}", $webnodes )
+  $web_status = run_command( "service ${websvc} status", $webnodes )
   out::message("result is : ${web_status}")
 }
