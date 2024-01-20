@@ -18,6 +18,6 @@ plan puppet_poc::web_app_db(
   String $webpkg = 'httpd',
   String $websvc = 'httpd'
 ) {
-  $web_status = run_command( "service ${websvc} status", $webnodes )
-  out::message("result is : ${web_status}")
+  $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
+  $web_status.each | $result_hash | { out::message("result is : ${result_hash}") }
 }
