@@ -1,0 +1,15 @@
+{
+    "description": "Install Tomcat application on node",
+    "input_method": "environment",
+    "supports_noop": true,
+    "parameters": {
+        "apphome": {
+            "description": "Tomcat application Home",
+            "type": "Optional[String]"
+        },
+        "appport": {
+            "description": "Tomcat applciation Port",
+            "type": "Optional[Integer]"
+        }
+    }
+}
