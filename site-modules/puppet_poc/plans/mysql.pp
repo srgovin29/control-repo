@@ -6,7 +6,7 @@ plan puppet_poc::mysql(
     package { 'mysql-server':
       ensure => present,
     }
-    service { 'mysqld1.service':
+    service { 'mysqld.service':
       ensure => running,
       enable => true,
     }
