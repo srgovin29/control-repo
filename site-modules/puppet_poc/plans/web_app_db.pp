@@ -17,7 +17,9 @@ plan puppet_poc::web_app_db(
   Integer $webuid =  14501,
   Integer $webgid = 14501,
   String $webpkg = 'httpd',
-  String $websvc = 'httpd'
+  String $websvc = 'httpd',
+  # DB configuration parameter
+  String $dbsvc = 'mysqld',
 ) {
   ### Starting web service 
   $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
@@ -45,6 +47,19 @@ plan puppet_poc::web_app_db(
        Can you please login ${appnodes} and verify the status" )
     }   else {
       out::message("App Service is up and running and the status is : ${app_status_res}")
+    }
+  }
+  ### Starting DB service 
+  $db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes )
+  $db_status.to_data.each | $db_result | {
+    notice("result is :${db_result}")
+    $db_status_res = $db_result['value']['stdout']
+    notice("value for stdout: ${db_status_res}")
+    if $db_status_res != "ActiveState=active\nSubState=running\n" {
+    fail_plan("DB Service named ${dbsvc} is not running , so plan fail here itself. 
+       Can you please login ${dbnodes} and verify the status" )
+    }   else {
+      out::message("DB Service is up and running and the status is : ${db_status_res}")
     }
   }
 }
