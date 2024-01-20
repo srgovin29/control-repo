@@ -24,14 +24,13 @@ plan puppet_poc::web_app_db(
     out::message("result is :${result}")
     $web_status_res = $result['value']['stdout']
     out::message("value for stdout: ${web_status_res}")
-  }
-  /*$web_status.to_data.each | $result_hash | {
-    $web_status_res = $result_hash['result']['stdout']
+    # $web_status.to_data.each | $result_hash | {
+    # $web_status_res = $result_hash['result']['stdout']
     if $web_status_res != "ActiveState=active\nSubState=running\n" {
     fail_plan("Webservice named ${websvc} is not running , so plan fail here itself. 
        Can you please login ${webnodes} and verify the status" )
     }   else {
       $web_status.to_data.each | $result_hash | { out::message("result is : ${result_hash}") }
     }
-  }*/
+  }
 }
