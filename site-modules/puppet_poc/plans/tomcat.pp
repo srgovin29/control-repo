@@ -49,9 +49,8 @@ plan puppet_poc::tomcat(
   }
 #### Running task from here to extract files and installing tomcat as
 #### installation managed by non managed by ssytem tools 
-  $tomcat_task_result = run_task('puppet_pod::tomcat_install',  $appnodes , {
-      'appport' => $appport, 'apphome' => $apphome,
-  }, '_catch_errors' => true )
+  $tomcat_task_result = run_task('puppet_pod::tomcat_install',  $appnodes , 'appport' => $appport, 'apphome' => $apphome,
+  '_catch_errors' => true )
   $tomcat_task_result.each |$result| {
     $target = $result.target.name
     if $result.ok {

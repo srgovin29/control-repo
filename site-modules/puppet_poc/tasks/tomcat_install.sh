@@ -1,6 +1,6 @@
 #!/bin/bash
-apphome = $PT_apphome
-appport    = $PT_appport
+apphome=$PT_apphome
+appport=$PT_appport
 if [ ! -d "$apphome" ]; then
   echo "$apphome does not exist."
   mkdir -p /opt/tomcat 
