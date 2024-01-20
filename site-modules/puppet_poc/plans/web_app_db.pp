@@ -10,6 +10,7 @@ plan puppet_poc::web_app_db(
   Integer      $appgid   = 15001,
   String       $apphome  = '/opt/tomcat',
   Integer      $appport  = 8080,
+  String       $appsvc   = tomcat,
   #web configuration parameter
   String $webuser = 'apacheadm',
   String $webgrp  = 'apachegrp',
@@ -18,19 +19,32 @@ plan puppet_poc::web_app_db(
   String $webpkg = 'httpd',
   String $websvc = 'httpd'
 ) {
+  ### Starting web service 
   $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
-  out::message("value is: ${web_status}")
+  notice("value is: ${web_status}")
   $web_status.to_data.each | $result | {
-    out::message("result is :${result}")
+    notice("result is :${result}")
     $web_status_res = $result['value']['stdout']
-    out::message("value for stdout: ${web_status_res}")
+    notice("value for stdout: ${web_status_res}")
     # $web_status.to_data.each | $result_hash | {
     # $web_status_res = $result_hash['result']['stdout']
     if $web_status_res != "ActiveState=active\nSubState=running\n" {
     fail_plan("Webservice named ${websvc} is not running , so plan fail here itself. 
        Can you please login ${webnodes} and verify the status" )
     }   else {
-      $web_status.to_data.each | $result_hash | { out::message("result is : ${result_hash}") }
+    out::message("Web Service is up and running and the status is : ${web_status_res}") }
+  }
+  #### Starting App service 
+  $app_status = run_command( "systemctl show -p SubState -p ActiveState ${appsvc}", $appnodes )
+  $app_status.to_data.each | $app_result | {
+    notice("result is :${app_result}")
+    $app_status_res = $app_result['value']['stdout']
+    notice("value for stdout: ${app_status_res}")
+    if $app_status_res != "ActiveState=active\nSubState=running\n" {
+    fail_plan("App Service named ${appsvc} is not running , so plan fail here itself. 
+       Can you please login ${appnodes} and verify the status" )
+    }   else {
+      out::message("App Service is up and running and the status is : ${app_status_res}")
     }
   }
 }
