@@ -23,6 +23,7 @@ plan puppet_poc::e2e_3tier(
 ) {
   #### Setup Web Application 
   $web_e2e_result = run_plan( 'puppet_poc::apache', targets => $webnodes, '_catch_errors' => true,
+    'webnodes' => $webnodes,
     'webuser' => $webuser,
     'webgrp'  => $webgrp,
     'webuid'  => $webuid,
