@@ -34,12 +34,17 @@ plan puppet_poc::e2e_3tier(
     '_catch_errors' => true,
   )
   $web_e2e_result.to_data.each | $web_results | {
-    $final_result = { 'web_output' => { $web_results['target'] => {
+    $web_node = $web_results['target']
+    $final_result = { 'web_output' => { $web_node => {
           'status' => $web_results['status'],
           'log' => $web_results['value']['report']['logs'],
           'output' => $web_results['value']['_output'],
         },
       },
+    }
+    if $final_result['web_output'][$webnode]['status'] != 'success' {
+      fail_plan("The issue with Webserver, Please check ${webnode}")
+      out::message("Results from web server e2e : ${final_result}")
     }
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
