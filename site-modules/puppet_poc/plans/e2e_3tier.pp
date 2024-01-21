@@ -35,9 +35,9 @@ plan puppet_poc::e2e_3tier(
   )
   $web_e2e_result.each | $web_results | {
     $web_output = { $web_results.target => {
-        'status' => $web_results.status,
-        'log' => $web_results.value.report.logs,
-        'output' => $web_results.value['_output'],
+        'status' => $web_results['status'],
+        'log' => $web_results['value']['report']['logs'],
+        'output' => $web_results['value']['_output'],
       },
     }
     $final_result = { 'web_output' => $web_output }
