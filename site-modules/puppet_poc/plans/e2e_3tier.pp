@@ -43,7 +43,7 @@ plan puppet_poc::e2e_3tier(
         'output' => $app_results['value']['_output'],
       },
     }
-    if $app_final_result['web_output'][$app_node]['status'] != 'success' {
+    if $app_final_result[$app_node]['status'] != 'success' {
       fail_plan("The issue with Webserver, Please check ${web_node}")
     } else {
       notice("Results from web server e2e : ${app_final_result}")
@@ -63,11 +63,10 @@ plan puppet_poc::e2e_3tier(
   )
   $web_e2e_result.to_data.each | $web_results | {
     $web_node = $web_results['target']
-    $web_final_result = { 'web_output' => { $web_node => {
-          'status' => $web_results['status'],
-          'log' => $web_results['value']['report']['logs'],
-          'output' => $web_results['value']['_output'],
-        },
+    $web_final_result = { $web_node => {
+        'status' => $web_results['status'],
+        'log' => $web_results['value']['report']['logs'],
+        'output' => $web_results['value']['_output'],
       },
     }
     if $web_final_result['web_output'][$web_node]['status'] != 'success' {
