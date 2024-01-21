@@ -32,7 +32,7 @@ plan puppet_poc::web_app_db_e2e(
     fail_plan("DB Service named ${dbsvc} is not running , so plan fail here itself. 
        Can you please login ${dbnodes} and verify the status" )
     }   else {
-      out::message("DB Service is up and running and the status is : ${db_status_res}")
+      notice ("DB Service is up and running and the status is : ${db_status_res}")
     }
   }
   #### Starting App service 
@@ -45,7 +45,7 @@ plan puppet_poc::web_app_db_e2e(
     fail_plan("DB service is up, But App Service named ${appsvc} is not running , so plan fail here itself. 
        Can you please login ${appnodes} and verify the status" )
     }   else {
-      out::message("DB and App Services are up and running. App service status is : ${app_status_res}")
+      notice("DB and App Services are up and running. App service status is : ${app_status_res}")
     }
   }
   ### Starting web service 
@@ -63,5 +63,6 @@ plan puppet_poc::web_app_db_e2e(
     }   else {
     out::message("DB,App and Web Service are up and running. Web service status is : ${web_status_res}") }
   }
-  return [$db_status, $app_status, $web_status]
+  $send_result = [$db_status, $app_status, $web_status]
+  return $send_result
 }

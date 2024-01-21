@@ -138,5 +138,5 @@ plan puppet_poc::e2e_3tier(
     websvc   => $websvc,
     '_catch_errors' => true,
   )
-  out::message(web_app_db_svc_result)
+  out::message($web_app_db_svc_result)
 }
