@@ -22,8 +22,8 @@ plan puppet_poc::e2e_3tier(
   String $dbsvc = 'mysqld',
 ) {
   $final_result = nil
-  $web_final_result = nil
-  $app_final_result = nil
+  # $web_final_result = nil
+  # $app_final_result = nil
   #### Setup Application Server 
   $app_e2e_result = run_plan( 'puppet_poc::tomcat_e2e',
     appnodes => $appnodes,
@@ -36,7 +36,7 @@ plan puppet_poc::e2e_3tier(
     appsvc   => $appsvc,
     '_catch_errors' => true,
   )
-  out::message("output result for app ${app_e2e_result}")
+  # out::message("output result for app ${app_e2e_result}")
   $app_e2e_result.to_data.each | $app_results | {
     $app_node = $app_results['target']
     $app_final_result = { $app_node => {
