@@ -34,6 +34,7 @@ plan puppet_poc::e2e_3tier(
     appsvc   => $appsvc,
     '_catch_errors' => true,
   )
+  out::message("output result for app ${app_e2e_result}")
   $app_e2e_result.to_data.each | $app_results | {
     $app_node = $app_results['target']
     $final_result = { 'app_output' => { $app_node => {
