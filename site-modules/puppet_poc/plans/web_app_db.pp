@@ -20,6 +20,7 @@ plan puppet_poc::web_app_db(
   String $websvc = 'httpd',
   # DB configuration parameter
   String $dbsvc = 'mysqld',
+  String $dbpkg = 'mysql-server'
 ) {
   ### Starting DB service 
   $db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes )
