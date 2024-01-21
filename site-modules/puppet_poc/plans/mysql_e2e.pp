@@ -13,16 +13,5 @@ plan puppet_poc::mysql_e2e(
       enable => true,
     }
   }
-  $mysql_results.each |$result| {
-    $target = $result.target.name
-    if $result.ok {
-      out::message("${target} Full result value for success: ${result}")
-      notice('=============================================')
-      out::message("${target} returned a value for success: ${result.value}")
-    } else {
-      out::message("${target} Full result value for failure: ${result.value["report"]["logs"]}")
-      notice('=============================================')
-      out::message("${target} errored with a message for failure: ${result.error.message}")
-    }
-  }
+  return $mysql_results
 }
