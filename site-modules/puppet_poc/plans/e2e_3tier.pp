@@ -65,11 +65,20 @@ plan puppet_poc::e2e_3tier(
   $tt.each | $app_task | {
     $app_e2e_result[$app_task].to_data.each | $app_results | {
       $app_node = $app_results['target']
-      $app_final_result = { $app_node => {
-          'status' => $app_results['status'],
-          'log' => $app_results['value']['report']['logs'],
-          'output' => $app_results['value']['_output'],
-        },
+      if $app_task != 'tomcat_task_result' {
+        $app_final_result = { $app_node => {
+            'status' => $app_results['status'],
+            'log' => $app_results['value']['report']['logs'],
+            'output' => $app_results['value']['_output'],
+          },
+        }
+      }
+      else {
+        $app_final_result = { $app_node => {
+            'status' => $app_results['status'],
+          },
+        }
+        out::message($app_e2e_result[$app_task])
       }
       if $app_final_result[$app_node]['status'] != 'success' {
         fail_plan("The issue with App server, Please check ${app_node}")
