@@ -41,7 +41,7 @@ plan puppet_poc::apache_e2e(
       enable => true,
     }
   }
-  $web_results.each | $result | {
+  /* $web_results.each | $result | {
     $node = $result.target.name
     if $result.ok {
       # out::message("${node} retuned a value : ${result}.value")
@@ -52,5 +52,6 @@ plan puppet_poc::apache_e2e(
       fail_plan("Has problem to build webserver service : ${websvc}")
       return $result.error
     }
-  }
+  } */
+  return $web_results
 }
