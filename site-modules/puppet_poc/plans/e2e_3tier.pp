@@ -20,10 +20,34 @@ plan puppet_poc::e2e_3tier(
   String $websvc = 'httpd',
   # DB configuration parameter
   String $dbsvc = 'mysqld',
+  String $dbpkg = 'mysql-server',
 ) {
   $final_result = {}
   # $web_final_result = nil
   # $app_final_result = nil
+  ### Setup DB server 
+  $db_e2e_result = run_plan('puppet_poc::mysql_e2e',
+    dbnodes => $dbnodes,
+    dbsvc   => $dbsvc,
+    dbpkg   => $dbpkg,
+    '_catch_errors' => true,
+  )
+  $db_e2e_result.to_data.each | $db_results | {
+    $db_node = $db_results['target']
+    $db_final_result = { $db_node => {
+        'status' => $db_results['status'],
+        'log' => $db_results['value']['report']['logs'],
+        'output' => $db_results['value']['_output'],
+      },
+    }
+    if $db_final_result[$db_node]['status'] != 'success' {
+      fail_plan("The issue with DB server, Please check ${db_node}")
+    } else {
+      notice("Results from web server e2e : ${db_final_result}")
+    }
+    out::message($db_final_result)
+  }
+
   #### Setup Application Server 
   $app_e2e_result = run_plan( 'puppet_poc::tomcat_e2e',
     appnodes => $appnodes,
@@ -46,12 +70,11 @@ plan puppet_poc::e2e_3tier(
       },
     }
     if $app_final_result[$app_node]['status'] != 'success' {
-      fail_plan("The issue with Webserver, Please check ${web_node}")
+      fail_plan("The issue with App server, Please check ${app_node}")
     } else {
       notice("Results from web server e2e : ${app_final_result}")
     }
-    $final_result1 = $final_result.merge($app_final_result)
-    return $final_result1
+    out::message($app_final_result)
   }
 
   #### Setup Web Application 
@@ -79,10 +102,9 @@ plan puppet_poc::e2e_3tier(
     }
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
-    notice("Results from web server e2e : ${web_final_result}")
-    $final_result2 = $final_result1.merge($web_final_result)
-    out::message($final_result)
-    return $final_result2
+    # notice("Results from web server e2e : ${web_final_result}")
+    # $final_result2 = $final_result1.merge($web_final_result)
+    out::message($web_final_result)
   }
   out::message("Final output for this plan is : ${final_result2}")
 }
