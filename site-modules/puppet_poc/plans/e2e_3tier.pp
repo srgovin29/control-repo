@@ -21,7 +21,7 @@ plan puppet_poc::e2e_3tier(
   # DB configuration parameter
   String $dbsvc = 'mysqld',
 ) {
-  $final_result = nil
+  $final_result = {}
   # $web_final_result = nil
   # $app_final_result = nil
   #### Setup Application Server 
