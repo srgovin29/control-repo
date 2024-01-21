@@ -33,7 +33,7 @@ plan puppet_poc::e2e_3tier(
     websvc  => $websvc,
     '_catch_errors' => true,
   )
-  $web_e2e_result.each | $web_results | {
+  $web_e2e_result.to_data.each | $web_results | {
     $web_output = { $web_results.target => {
         'status' => $web_results['status'],
         'log' => $web_results['value']['report']['logs'],
