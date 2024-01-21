@@ -22,14 +22,15 @@ plan puppet_poc::e2e_3tier(
   String $dbsvc = 'mysqld',
 ) {
   #### Setup Web Application 
-  $web_e2e_result = run_plan( 'puppet_poc::apache', $webnodes, '_catch_errors' => true,
-    'webnodes' => $webnodes,
-    'webuser' => $webuser,
-    'webgrp'  => $webgrp,
-    'webuid'  => $webuid,
-    'webgid'  => $webgid,
-    'webpkg'  => $webpkg,
-    'websvc'  => $websvc,
+  $web_e2e_result = run_plan( 'puppet_poc::apache',
+    webnodes => $webnodes,
+    webuser => $webuser,
+    webgrp  => $webgrp,
+    webuid  => $webuid,
+    webgid  => $webgid,
+    webpkg  => $webpkg,
+    websvc  => $websvc,
+    '_catch_errors' => true,
   )
   out::message("Results from web server : ${web_e2e_result}")
 }
