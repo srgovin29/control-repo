@@ -21,7 +21,7 @@ plan puppet_poc::e2e_3tier(
   # DB configuration parameter
   String $dbsvc = 'mysqld',
 ) {
-  $final_result = Hash.new
+  $final_result = {}
   # $web_final_result = nil
   # $app_final_result = nil
   #### Setup Application Server 
@@ -50,7 +50,7 @@ plan puppet_poc::e2e_3tier(
     } else {
       notice("Results from web server e2e : ${app_final_result}")
     }
-    $final_result.merge($app_final_result)
+    $final_result = $final_result + $app_final_result
   }
 
   #### Setup Web Application 
@@ -79,7 +79,8 @@ plan puppet_poc::e2e_3tier(
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
     notice("Results from web server e2e : ${web_final_result}")
-    $final_result.merge($web_final_result)
+    $final_result = $final_result + $web_final_result
+    out::message($final_result)
   }
   out::message("Final output for this plan is : ${final_result}")
 }
