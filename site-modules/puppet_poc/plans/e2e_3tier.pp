@@ -21,9 +21,9 @@ plan puppet_poc::e2e_3tier(
   # DB configuration parameter
   String $dbsvc = 'mysqld',
 ) {
-  $final_result = {}
-  $web_final_result = {}
-  $app_final_result = {}
+  $final_result = nil
+  # $web_final_result = {}
+  # $app_final_result = {}
   #### Setup Application Server 
   $app_e2e_result = run_plan( 'puppet_poc::tomcat_e2e',
     appnodes => $appnodes,
@@ -78,7 +78,7 @@ plan puppet_poc::e2e_3tier(
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
     notice("Results from web server e2e : ${web_final_result}")
-    $final_result = { 'web_results' => $web_final_result, 'app_results' => $app_final_result }
+    $final_result << { 'web_results' => $web_final_result, 'app_results' => $app_final_result }
   }
   out::message("Final output for this plan is : ${final_result}")
 }
