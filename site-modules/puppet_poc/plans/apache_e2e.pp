@@ -41,17 +41,17 @@ plan puppet_poc::apache_e2e(
       enable => true,
     }
   }
-  /* $web_results.each | $result | {
-    $node = $result.target.name
-    if $result.ok {
-      # out::message("${node} retuned a value : ${result}.value")
-      return $result.value
-    }
-    else {
-      # out::message("${node} errored with a message: ${result.error}")
-      fail_plan("Has problem to build webserver service : ${websvc}")
-      return $result.error
-    }
-  } */
+  # /* $web_results.each | $result | {
+  # $node = $result.target.name
+  # if $result.ok {
+  #   # out::message("${node} retuned a value : ${result}.value")
+  #    return $result.value
+  #  }
+  #  else {
+  #    # out::message("${node} errored with a message: ${result.error}")
+  #    fail_plan("Has problem to build webserver service : ${websvc}")
+  #    return $result.error
+  #  }
+  # } */
   return $web_results
 }

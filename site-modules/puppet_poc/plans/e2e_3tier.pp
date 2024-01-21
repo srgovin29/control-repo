@@ -22,15 +22,37 @@ plan puppet_poc::e2e_3tier(
   String $dbsvc = 'mysqld',
 ) {
   $final_result = {}
+  #### Setup Application Server 
+  $app_e2e_result = run_plan( 'puppet_poc::tomcat_e2e',
+    appnodes => $appnodes,
+    appuser  => $appuser,
+    appgrp   => $appgrp,
+    appuid   => $appuid,
+    appgid   => $appgid,
+    apphome  => $apphome,
+    appport  => $appport,
+    appsvc   => $appsvc,
+    '_catch_errors' => true,
+  )
+  $app_e2e_result.to_data.each | $app_results | {
+    $app_node = $app_results['target']
+    $final_result = { 'app_output' => { $app_node => {
+          'status' => $app_results['status'],
+          'log' => $app_results['value']['report']['logs'],
+          'output' => $app_results['value']['_output'],
+        },
+      },
+    }
+  }
   #### Setup Web Application 
   $web_e2e_result = run_plan( 'puppet_poc::apache_e2e',
     webnodes => $webnodes,
-    webuser => $webuser,
-    webgrp  => $webgrp,
-    webuid  => $webuid,
-    webgid  => $webgid,
-    webpkg  => $webpkg,
-    websvc  => $websvc,
+    webuser  => $webuser,
+    webgrp   => $webgrp,
+    webuid   => $webuid,
+    webgid   => $webgid,
+    webpkg   => $webpkg,
+    websvc   => $websvc,
     '_catch_errors' => true,
   )
   $web_e2e_result.to_data.each | $web_results | {
