@@ -69,7 +69,7 @@ plan puppet_poc::e2e_3tier(
         'output' => $web_results['value']['_output'],
       },
     }
-    if $web_final_result['web_output'][$web_node]['status'] != 'success' {
+    if $web_final_result[$web_node]['status'] != 'success' {
       fail_plan("The issue with Webserver, Please check ${web_node}")
       # out::message("Results from web server e2e : ${final_result}")
     }
