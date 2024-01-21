@@ -1,4 +1,9 @@
 ## This plan is E2E setup for 3 tier Application 
+$final_result = {}
+$final_result['web'] = {}
+$final_result['app'] = {}
+$final_result['db'] = {}
+
 plan puppet_poc::e2e_3tier(
   TargetSpec   $dbnodes = 'puppetagent03.devops.com',
   TargetSpec   $webnodes = 'puppetagent01.devops.com',
@@ -32,5 +37,11 @@ plan puppet_poc::e2e_3tier(
     websvc  => $websvc,
     '_catch_errors' => true,
   )
-  out::message("Results from web server : ${web_e2e_result}")
+  $web_e2e_result.each | $web_results | {
+    final_result['web']['target'] = $web_results.target
+    final_result['web']['target']['status'] =   $web_results.status
+    final_result['web']['target']['log'] = $web_results.value.report.logs
+    final_result['web']['target']['output'] = $web_results.value['_output']
+  }
+  out::message("Results from web server e2e : ${final_result}")
 }
