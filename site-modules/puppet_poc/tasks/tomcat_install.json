@@ -1,5 +1,4 @@
-{
-    "description": "Install Tomcat application on node",
+{    "description": "Install Tomcat application on node",
     "input_method": "environment",
     "supports_noop": true,
     "parameters": {

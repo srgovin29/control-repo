@@ -7,7 +7,7 @@ plan puppet_poc::tomcat_e2e(
   Integer      $appgid   = 15001,
   String       $apphome  = '/opt/tomcat',
   Integer      $appport  = 8080,
-
+  String       $appsvc   = 'tomcat',
 ) {
   $tomcat_app_results = apply($appnodes, '_catch_errors' => true ) {
     package { 'java-1.8.0-openjdk-devel':
@@ -49,8 +49,8 @@ plan puppet_poc::tomcat_e2e(
   # }
 #### Running task from here to extract files and installing tomcat as
 #### installation managed by non managed by ssytem tools 
-  $tomcat_task_result = run_task('puppet_poc::tomcat_install',  $appnodes , 'appport' => $appport, 'apphome' => $apphome,
-  '_catch_errors' => true )
+  $tomcat_task_result = run_task('puppet_poc::tomcat_install',  $appnodes , 'appport' => $appport, 'appsvc' => $appsvc,
+  'apphome' => $apphome,'_catch_errors' => true )
   # $tomcat_task_result.each |$result| {
   #  $target = $result.target.name
   #  if $result.ok {

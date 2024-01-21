@@ -1,6 +1,7 @@
 #!/bin/bash
 apphome=$PT_apphome
 appport=$PT_appport
+appsvc=$PT_appsvc
 if [ ! -d "$apphome" ]; then
   echo "$apphome does not exist."
   mkdir -p /opt/tomcat 
@@ -25,6 +26,6 @@ echo "Adding Firewall to port $appport"
 # firewall-cmd --reload
 echo "starting tomcat service"
 systemctl daemon-reload
-systemctl start tomcat
-systemctl status tomcat
-systemctl enable tomcat
+systemctl start $appsvc
+systemctl status $appsvc
+systemctl enable $appsvc
