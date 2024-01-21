@@ -6,6 +6,10 @@
             "description": "Tomcat application Home",
             "type": "Optional[String]"
         },
+        "appsvc": {
+                "description": "Tomcat application Service",
+                "type": "Optional[String]"
+            },
         "appport": {
             "description": "Tomcat applciation Port",
             "type": "Optional[Integer]"
