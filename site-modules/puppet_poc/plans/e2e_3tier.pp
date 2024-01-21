@@ -22,7 +22,7 @@ plan puppet_poc::e2e_3tier(
   String $dbsvc = 'mysqld',
 ) {
   #### Setup Web Application 
-  $web_e2e_result = run_plan( 'puppet_poc::apache',
+  $web_e2e_result = run_plan( 'puppet_poc::apache_e2e',
     webnodes => $webnodes,
     webuser => $webuser,
     webgrp  => $webgrp,
