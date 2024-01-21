@@ -37,14 +37,19 @@ plan puppet_poc::e2e_3tier(
   out::message("output result for app ${app_e2e_result}")
   $app_e2e_result.to_data.each | $app_results | {
     $app_node = $app_results['target']
-    $final_result = { 'app_output' => { $app_node => {
-          'status' => $app_results['status'],
-          'log' => $app_results['value']['report']['logs'],
-          'output' => $app_results['value']['_output'],
-        },
+    $app_final_result = { $app_node => {
+        'status' => $app_results['status'],
+        'log' => $app_results['value']['report']['logs'],
+        'output' => $app_results['value']['_output'],
       },
     }
+    if $app_final_result['web_output'][$app_node]['status'] != 'success' {
+      fail_plan("The issue with Webserver, Please check ${web_node}")
+    } else {
+      notice("Results from web server e2e : ${app_final_result}")
+    }
   }
+
   #### Setup Web Application 
   $web_e2e_result = run_plan( 'puppet_poc::apache_e2e',
     webnodes => $webnodes,
@@ -58,19 +63,21 @@ plan puppet_poc::e2e_3tier(
   )
   $web_e2e_result.to_data.each | $web_results | {
     $web_node = $web_results['target']
-    $final_result = { 'web_output' => { $web_node => {
+    $web_final_result = { 'web_output' => { $web_node => {
           'status' => $web_results['status'],
           'log' => $web_results['value']['report']['logs'],
           'output' => $web_results['value']['_output'],
         },
       },
     }
-    if $final_result['web_output'][$web_node]['status'] != 'success' {
+    if $web_final_result['web_output'][$web_node]['status'] != 'success' {
       fail_plan("The issue with Webserver, Please check ${web_node}")
-      out::message("Results from web server e2e : ${final_result}")
+      # out::message("Results from web server e2e : ${final_result}")
     }
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
-    out::message("Results from web server e2e : ${final_result}")
+    notice("Results from web server e2e : ${web_final_result}")
   }
+  $final_results = { 'web_results' => $web_final_result, 'app_results' => $app_final_result }
+  out::message("Final output for this plan is : ${final_results}")
 }
