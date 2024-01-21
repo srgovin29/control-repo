@@ -22,6 +22,8 @@ plan puppet_poc::e2e_3tier(
   String $dbsvc = 'mysqld',
 ) {
   $final_result = {}
+  $web_final_result = {}
+  $app_final_result = {}
   #### Setup Application Server 
   $app_e2e_result = run_plan( 'puppet_poc::tomcat_e2e',
     appnodes => $appnodes,
