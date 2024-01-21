@@ -61,22 +61,24 @@ plan puppet_poc::e2e_3tier(
     '_catch_errors' => true,
   )
   # out::message("output result for app ${app_e2e_result}")
-  $app_e2e_result.to_data.each | $app_results | {
-    $app_node = $app_results['target']
-    $app_final_result = { $app_node => {
-        'status' => $app_results['status'],
-        'log' => $app_results['value']['report']['logs'],
-        'output' => $app_results['value']['_output'],
-      },
+  $tt = ['tomcat_apply_result', 'tomcat_task_result']
+  $tt.each | $app_task | {
+    $app_e2e_result[$app_task].to_data.each | $app_results | {
+      $app_node = $app_results['target']
+      $app_final_result = { $app_node => {
+          'status' => $app_results['status'],
+          'log' => $app_results['value']['report']['logs'],
+          'output' => $app_results['value']['_output'],
+        },
+      }
+      if $app_final_result[$app_node]['status'] != 'success' {
+        fail_plan("The issue with App server, Please check ${app_node}")
+      } else {
+        notice("Results from web server e2e : ${app_final_result}")
+      }
+      out::message($app_final_result)
     }
-    if $app_final_result[$app_node]['status'] != 'success' {
-      fail_plan("The issue with App server, Please check ${app_node}")
-    } else {
-      notice("Results from web server e2e : ${app_final_result}")
-    }
-    out::message($app_final_result)
   }
-
   #### Setup Web Application 
   $web_e2e_result = run_plan( 'puppet_poc::apache_e2e',
     webnodes => $webnodes,
@@ -106,4 +108,26 @@ plan puppet_poc::e2e_3tier(
     # $final_result2 = $final_result1.merge($web_final_result)
     out::message($web_final_result)
   }
+  $web_app_db_svc_result = run_plan( 'puppet_poc::web_app_db_e2e',
+    dbnodes => $dbnodes,
+    dbsvc   => $dbsvc,
+    dbpkg   => $dbpkg,
+    appnodes => $appnodes,
+    appuser  => $appuser,
+    appgrp   => $appgrp,
+    appuid   => $appuid,
+    appgid   => $appgid,
+    apphome  => $apphome,
+    appport  => $appport,
+    appsvc   => $appsvc,
+    webnodes => $webnodes,
+    webuser  => $webuser,
+    webgrp   => $webgrp,
+    webuid   => $webuid,
+    webgid   => $webgid,
+    webpkg   => $webpkg,
+    websvc   => $websvc,
+    '_catch_errors' => true,
+  )
+  out::message(web_app_db_svc_result)
 }
