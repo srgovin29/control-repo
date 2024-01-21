@@ -43,6 +43,6 @@ plan puppet_poc::e2e_3tier(
     }
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
+    out::message("Results from web server e2e : ${final_result}")
   }
-  out::message("Results from web server e2e : ${final_result}")
 }
