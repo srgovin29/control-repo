@@ -10,7 +10,7 @@ plan puppet_poc::e2e_3tier(
   Integer      $appgid   = 15001,
   String       $apphome  = '/opt/tomcat',
   Integer      $appport  = 8080,
-  String       $appsvc   = tomcat,
+  String       $appsvc   = 'tomcat',
   #web configuration parameter
   String $webuser = 'apacheadm',
   String $webgrp  = 'apachegrp',
