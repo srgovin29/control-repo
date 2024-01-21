@@ -61,6 +61,6 @@ plan puppet_poc::tomcat_e2e(
   #    notice("Print whole error message ${target} errored with a message: ${result.error}")
   #  }
   # }
-  $tomcat_reults = { 'tomcat_apply_result' => $tomcat_app_results, 'tomcat_task_result' => $tomcat_task_result }
-  return $tomcat_app_results
+  $tomcat_results = { 'tomcat_apply_result' => $tomcat_app_results, 'tomcat_task_result' => $tomcat_task_result }
+  return $tomcat_results
 }

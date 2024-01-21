@@ -106,5 +106,4 @@ plan puppet_poc::e2e_3tier(
     # $final_result2 = $final_result1.merge($web_final_result)
     out::message($web_final_result)
   }
-  out::message("Final output for this plan is : ${final_result2}")
 }
