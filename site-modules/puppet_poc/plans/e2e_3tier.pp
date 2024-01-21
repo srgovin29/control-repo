@@ -50,7 +50,7 @@ plan puppet_poc::e2e_3tier(
     } else {
       notice("Results from web server e2e : ${app_final_result}")
     }
-    $final_result.mergee($app_final_result)
+    $final_result.merge($app_final_result)
   }
 
   #### Setup Web Application 
