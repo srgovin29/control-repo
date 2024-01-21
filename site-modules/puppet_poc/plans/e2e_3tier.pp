@@ -50,7 +50,8 @@ plan puppet_poc::e2e_3tier(
     } else {
       notice("Results from web server e2e : ${app_final_result}")
     }
-    $final_result = $final_result.merge($app_final_result)
+    $final_result1 = $final_result.merge($app_final_result)
+    return final_result1
   }
 
   #### Setup Web Application 
@@ -79,8 +80,9 @@ plan puppet_poc::e2e_3tier(
     # out::message("Results from web server web_output e2e : ${web_output}")
     # $final_result = { 'web_output' => $web_output }
     notice("Results from web server e2e : ${web_final_result}")
-    $final_result = $final_result.merge($web_final_result)
+    $final_result2 = $final_result1.merge($web_final_result)
     out::message($final_result)
+    return $final_result2
   }
-  out::message("Final output for this plan is : ${final_result}")
+  out::message("Final output for this plan is : ${final_result2}")
 }
