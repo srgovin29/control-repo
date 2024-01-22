@@ -4,7 +4,7 @@ plan puppet_poc::mysql_e2e(
   String $dbpkg = 'mysql-server',
   String $dbsvc = 'mysqld',
 ) {
-  $mysql_results = apply($dbnodes, '_catch_errors' => true ) {
+  $mysql_results = apply($dbnodes, '_catch_errors' => true, '_description' => "Setting up Database server on ${dbnodes}" ) {
     package { $dbpkg:
       ensure => present,
     }
