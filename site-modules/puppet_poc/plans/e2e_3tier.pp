@@ -31,6 +31,7 @@ plan puppet_poc::e2e_3tier(
     dbsvc   => $dbsvc,
     dbpkg   => $dbpkg,
     '_catch_errors' => true,
+    '_description'  => 'Database installtion and setup'
   )
   $db_e2e_result.to_data.each | $db_results | {
     $db_node = $db_results['target']
@@ -59,6 +60,7 @@ plan puppet_poc::e2e_3tier(
     appport  => $appport,
     appsvc   => $appsvc,
     '_catch_errors' => true,
+    '_description'  => 'App server pkg installtion and setup ',
   )
   # out::message("output result for app ${app_e2e_result}")
   $tt = ['tomcat_apply_result', 'tomcat_task_result']
@@ -98,6 +100,7 @@ plan puppet_poc::e2e_3tier(
     webpkg   => $webpkg,
     websvc   => $websvc,
     '_catch_errors' => true,
+    '_description'  => 'Web Application installation and Setup'
   )
   $web_e2e_result.to_data.each | $web_results | {
     $web_node = $web_results['target']
@@ -137,6 +140,7 @@ plan puppet_poc::e2e_3tier(
     webpkg   => $webpkg,
     websvc   => $websvc,
     '_catch_errors' => true,
+    '_description'  => 'DB/App/Web Service status'
   )
   out::message($web_app_db_svc_result)
 }
