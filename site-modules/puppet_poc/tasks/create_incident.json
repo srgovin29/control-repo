@@ -36,8 +36,7 @@
         "token": {
             "description": "Token Value",
             "type": "String",
-            "default": "Basic YWRtaW46Q2g9YURKbko4ZDMl",
-            "sensitive": true
+            "default": "Basic YWRtaW46Q2g9YURKbko4ZDMl"
         }
     }
 }
