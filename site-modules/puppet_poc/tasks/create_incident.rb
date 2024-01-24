@@ -1,3 +1,4 @@
+#!/opt/puppetlabs/puppet/bin/ruby
 require 'uri'
 require 'net/http'
 require 'json'
