@@ -1,0 +1,11 @@
+{
+    "environment" : "produion",
+    "task" : "Creating incident without pasing any paraeters",
+    "params" : {
+      "action" : "No",
+      "name" : "No"
+    },
+    "scope" : {
+      "nodes" : ["puppetmaster.devops.com"]
+    }
+  }
