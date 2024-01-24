@@ -8,7 +8,7 @@ plan puppet_poc::apache (
   String $webpkg = 'httpd',
   String $websvc = 'httpd'
 ) {
-  $web_results = apply($webnodes, '_catch_errors' => true ) {
+  $web_results = apply($webnodes, '_catch_errors' => true, 'description' => "Setting up Webserver on node ${webnodes}") {
     group { $webgrp:
       ensure => present,
       gid    => $webgid,

@@ -23,7 +23,8 @@ plan puppet_poc::web_app_db(
   String $dbpkg = 'mysql-server'
 ) {
   ### Starting DB service 
-  $db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes )
+  $db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes,
+  '_description' => "Checking DB server status, ${dbnodes}", )
   $db_status.to_data.each | $db_result | {
     notice("result is :${db_result}")
     $db_status_res = $db_result['value']['stdout']
@@ -36,7 +37,8 @@ plan puppet_poc::web_app_db(
     }
   }
   #### Starting App service 
-  $app_status = run_command( "systemctl show -p SubState -p ActiveState ${appsvc}", $appnodes )
+  $app_status = run_command( "systemctl show -p SubState -p ActiveState ${appsvc}", $appnodes,
+  '_description' => "Checking App service status on ${appnodes}")
   $app_status.to_data.each | $app_result | {
     notice("result is :${app_result}")
     $app_status_res = $app_result['value']['stdout']
@@ -49,7 +51,8 @@ plan puppet_poc::web_app_db(
     }
   }
   ### Starting web service 
-  $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes )
+  $web_status = run_command( "systemctl show -p SubState -p ActiveState ${websvc}", $webnodes,
+  '_description' => "Checking Web server status on ${webnodes}" )
   notice("value is: ${web_status}")
   $web_status.to_data.each | $result | {
     notice("result is :${result}")

@@ -10,7 +10,7 @@ plan puppet_poc::tomcat(
   String       $appsvc   = 'tomcat'
 
 ) {
-  $tomcat_app_results = apply($appnodes, '_catch_errors' => true ) {
+  $tomcat_app_results = apply($appnodes, '_catch_errors' => true,'_description' => "Setting up App Server on ${appnodes}" ) {
     package { 'java-1.8.0-openjdk-devel':
       ensure => present,
     }
@@ -51,7 +51,7 @@ plan puppet_poc::tomcat(
 #### Running task from here to extract files and installing tomcat as
 #### installation managed by non managed by ssytem tools 
   $tomcat_task_result = run_task('puppet_poc::tomcat_install',  $appnodes , 'appport' => $appport, 'appsvc' => $appsvc,
-  'apphome' => $apphome, '_catch_errors' => true )
+  'apphome' => $apphome, '_catch_errors' => true, '_description' => "Setting up App servers setup task on node ${appnodes}")
   $tomcat_task_result.each |$result| {
     $target = $result.target.name
     if $result.ok {
