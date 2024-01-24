@@ -14,14 +14,16 @@ sysparm_fields = params['sysparm_fields']
 token = params['token']
 
 incident_ep = snow_server + inc_ep
-params = { "sysparm_display_value"=>$sysparm_display_value,
-          "sysparm_exclude_reference_link"=>$sysparm_exclude_reference_link, "sysparm_fields"=>$sysparm_fields }
+params = { "sysparm_display_value": sysparm_display_value,
+    "sysparm_exclude_reference_link": sysparm_exclude_reference_link, "sysparm_fields": sysparm_fields }
+puts incident_ep
+puts params
 
 uri = URI(incident_ep)
 https = Net::HTTP.new(uri.host, uri.port)
-https.use_ssl = $use_ssl
-request = Net::HTTP::Post.new(uri.path)
-request["Authorization"] = $token
+https.use_ssl = use_ssl
+request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
+request["Authorization"] = token
 
 
 # url = URI("https://dev218806.service-now.com/api/now/table/incident?sysparm_display_value=true&sysparm_exclude_reference_link=true&sysparm_fields=number,short_description,sys_created_on,state,sys_created_by,impact,priority,caller_id,description")
