@@ -1,10 +1,10 @@
+require 'uri'
+require 'net/http'
 require 'json'
 require 'open3'
 require 'puppet'
-require 'uri'
-require 'net/http'
 
-params = JSON.parse($stdin.read)
+params = JSON.parse(STDIN.read)
 snow_server = params['snow_server']
 inc_ep = params['inc_ep']
 sysparm_display_value = params['sysparm_display_value']
