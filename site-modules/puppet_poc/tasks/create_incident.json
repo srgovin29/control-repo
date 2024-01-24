@@ -1,5 +1,5 @@
 {    "description": "Create Incident  from Puppet",
-    "input_method": "environment",
+    "input_method": "stdin",
     "supports_noop": true,
     "parameters": {
         "snow_server": {
