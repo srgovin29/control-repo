@@ -4,12 +4,12 @@
     "parameters": {
         "snow_server": {
             "description": "Service now server",
-            "type": "Optional[String]",
+            "type": "String",
             "default": "https://dev218806.service-now.com"
         },
         "inc_ep": {
                 "description": "Service now Endpoint",
-                "type": "Optional[String]",
+                "type": "String",
                 "default": "/api/now/table/incident"
             },
         "sysparm_display_value": {
