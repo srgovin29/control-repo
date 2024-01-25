@@ -1,0 +1,8 @@
+{    "description": "Run API from Puppet master",
+    "input_method": "stdin",
+    "supports_noop": true,
+    "parameters": { },
+    "scope" : {
+      "nodes" : ["puppetmaster.devops.com"]
+    }
+  }
