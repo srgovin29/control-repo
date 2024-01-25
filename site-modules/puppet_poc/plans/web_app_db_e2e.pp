@@ -10,7 +10,7 @@ plan puppet_poc::web_app_db_e2e(
   Integer      $appgid   = 15001,
   String       $apphome  = '/opt/tomcat',
   Integer      $appport  = 8080,
-  String       $appsvc   = tomcat,
+  String       $appsvc   = 'tomcat',
   #web configuration parameter
   String $webuser = 'apacheadm',
   String $webgrp  = 'apachegrp',
@@ -23,8 +23,8 @@ plan puppet_poc::web_app_db_e2e(
   String $dbpkg = 'mysql-server'
 ) {
   ### Starting DB service 
-$db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes , '_description' => "Checking DB server status,
-    ${dbnodes}", )
+  $db_status = run_command( "systemctl show -p SubState -p ActiveState ${dbsvc}", $dbnodes ,
+  '_description' => "Checking DB server status, ${dbnodes}", )
   $db_status.to_data.each | $db_result | {
     notice("result is :${db_result}")
     $db_status_res = $db_result['value']['stdout']
