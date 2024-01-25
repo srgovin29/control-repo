@@ -5,7 +5,7 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("https://api.tvmaze.com/shows/1?embed=cast")
+url = URI('https://api.tvmaze.com/shows/1?embed=cast')
 
 https = Net::HTTP.new(url.host, url.port)
 https.use_ssl = true

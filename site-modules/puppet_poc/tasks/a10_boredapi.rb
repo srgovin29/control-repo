@@ -5,9 +5,9 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("http://www.boredapi.com/api/activity?type=recreational")
+url = URI('http://www.boredapi.com/api/activity?type=recreational')
 
-http = Net::HTTP.new(url.host, url.port);
+http = Net::HTTP.new(url.host, url.port)
 request = Net::HTTP::Get.new(url)
 
 response = http.request(request)

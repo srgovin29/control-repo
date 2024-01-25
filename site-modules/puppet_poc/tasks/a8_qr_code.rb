@@ -5,9 +5,9 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=100x100")
+url = URI('http://api.qrserver.com/v1/create-qr-code/?data=HelloWorld!&size=100x100')
 
-http = Net::HTTP.new(url.host, url.port);
+http = Net::HTTP.new(url.host, url.port)
 request = Net::HTTP::Post.new(url)
 
 response = http.request(request)

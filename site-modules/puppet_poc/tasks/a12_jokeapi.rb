@@ -5,7 +5,7 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("https://v2.jokeapi.dev/joke/Any?type=twopart")
+url = URI('https://v2.jokeapi.dev/joke/Any?type=twopart')
 
 https = Net::HTTP.new(url.host, url.port)
 https.use_ssl = true

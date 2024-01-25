@@ -5,7 +5,7 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("https://picsum.photos/200")
+url = URI('https://picsum.photos/200')
 
 https = Net::HTTP.new(url.host, url.port)
 https.use_ssl = true

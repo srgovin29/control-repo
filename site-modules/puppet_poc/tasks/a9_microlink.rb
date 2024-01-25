@@ -5,8 +5,7 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-
-url = URI("https://api.microlink.io/?url=https://github.com/microlinkhq")
+url = URI('https://api.microlink.io/?url=https://github.com/microlinkhq')
 
 https = Net::HTTP.new(url.host, url.port)
 https.use_ssl = true

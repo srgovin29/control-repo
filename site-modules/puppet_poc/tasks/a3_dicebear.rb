@@ -5,7 +5,7 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-url = URI("https://api.dicebear.com/7.x/lorelei/svg")
+url = URI('https://api.dicebear.com/7.x/lorelei/svg')
 
 https = Net::HTTP.new(url.host, url.port)
 https.use_ssl = true
