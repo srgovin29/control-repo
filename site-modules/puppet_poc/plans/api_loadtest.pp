@@ -9,7 +9,7 @@ plan puppet_poc::api_loadtest (
   $tasks_api.each | $api_task | {
     $task_output = run_task($api_task, $midnode, '_catch_errors' => true ,'_description' => "Task - ${api_task} is running")
     $t_hash = { $api_task => $task_output }
-    $output = $output.merge($t_hash)
+    $output = stdlib::merge($output, $t_hash)
     out::message($output)
     # $output["${api_task}"] = $task_output
   }
