@@ -19,5 +19,16 @@ forge 'https://forge.puppet.com'
 mod 'puppetlabs-stdlib', '9.4.1'
 mod 'puppetlabs-concat', '9.0.2'
 mod 'puppetlabs-apache', '12.0.2' 
+### For dashboard 
 mod 'puppetlabs-puppet_operational_dashboards', '2.2.0'
+### For dashboard dependencies 
+mod 'puppet-grafana', '13.1.0'
+mod 'puppet-telegraf', '5.3.0'
+mod 'puppetlabs-apt', '9.2.0'
+mod 'puppetlabs-inifile', '6.1.0'
+mod 'puppetlabs-influxdb', '2.4.0'
+
+
+
+
 
